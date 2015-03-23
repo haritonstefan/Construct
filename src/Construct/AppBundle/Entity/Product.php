@@ -3,6 +3,8 @@
 namespace Construct\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Product
@@ -42,6 +44,24 @@ class Product
      */
     private $price;
 
+    /**
+     * @ORM\Column(name="image_name", type="string", length=255)
+     *
+     * @var string $imageName
+     */
+    private $imageName;
+
+    /**
+     * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName")
+     *
+     * @var File $imageFile
+     */
+    private $imageFile;
+
+    /**
+     * @var integer
+     */
+    private $showOnHomePage;
 
     /**
      * Get id
@@ -118,6 +138,52 @@ class Product
     public function setPrice($price)
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get imageName
+     *
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * Set imageName
+     *
+     * @param string $imageName
+     * @return Product
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    /**
+     * Get image file
+     *
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * Set image file
+     *
+     * @param File $image
+     * @return $this
+     */
+    public function setImageFile(File $image)
+    {
+        $this->imageFile = $image;
 
         return $this;
     }
