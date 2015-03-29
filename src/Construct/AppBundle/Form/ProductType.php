@@ -18,9 +18,9 @@ class ProductType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('price')
-            ->add('imageName');
+        ;
     }
-
+    
     /**
      * @param OptionsResolverInterface $resolver
      */

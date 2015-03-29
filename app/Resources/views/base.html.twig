@@ -10,7 +10,8 @@
     'bundles/app/css/style.css'
     'bundles/app/css/flexslider.css'
     'bundles/app/css/prettyPhoto.css'
-
+    'bundles/app/css/bootstrap.min.css'
+    'bundles/app/css/modern-business.css'
     filter="cssrewrite" %}
     <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
@@ -29,62 +30,34 @@
 </head>
 
 {% block header %}
-    <header class="header_bg clearfix">
-        <div class="container clearfix">
-            <!-- Social -->
-            <h5>Construiește cu noi</h5>
-            <!-- /Social -->
-            <!-- Logo -->
-            <div class="logo">
-                <a href="index.html"><h5>Construct SRL</a>
-            </div>
-            <!-- /Logo -->
+<header class="header_bg clearfix">
+    <div class="container clearfix">
 
-            <!-- Master Nav -->
-            <nav class="main-menu">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li>
-                        <a>Pages</a>
-                        <ul>
-                            <li><a href="elements.html">Elements</a></li>
-                            <li><a href="typography.html">Typography</a></li>
-                            <li><a href="blog_single.html">Blog Single Post</a></li>
-
-                            <li><a href="javascript:">Pricing</a>
-                                <ul>
-                                    <li><a href="pricing_2_cols.html">Pricing 2 Cols</a></li>
-                                    <li><a href="pricing_3_cols.html">Pricing 3 Cols</a></li>
-                                    <li><a href="pricing_4_cols.html">Pricing 4 Cols</a></li>
-                                    <li><a href="pricing_5_cols.html">Pricing 5 Cols</a></li>
-
-                                </ul>
-                            </li>
-
-                            <li><a href="full_width.html">Full Width</a></li>
-                            <li><a href="404.html">404 Page</a></li>
-                        </ul>
-                    </li>
-                    <li><a>Portfolio</a>
-                        <ul>
-                            <li><a href="portfolio_2_cols.html">Portfolio 2 Cols</a></li>
-                            <li><a href="portfolio_3_cols.html">Portfolio 3 Cols</a></li>
-                            <li><a href="portfolio_4_cols.html">Portfolio 4 Cols</a></li>
-                            <li><a href="portfolio_details.html">Portfolio Details</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-            <!-- /Master Nav -->
+        <!-- Logo -->
+        {% image '@AppBundle/Resources/public/images/logo.jpg' %}
+        <div class="logo">
+            {#<a href="{{ path('index') }}"> <img src="{{ asset_url }}"> </a>#}
         </div>
-    </header>
+        {% endimage %}
+        <!-- /Logo -->
+
+        <!-- Master Nav -->
+        <nav class="main-menu">
+            <ul>
+                <li><a href="{{ path('index') }}">Home</a></li>
+                <li><a href="{{ path('product') }}">Products</a></li>
+                <li><a href="{{ path('service') }}">Services</a></li>
+                <li><a href="{{ path('about') }}">About</a></li>
+                <li><a href="{{ path('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+        <!-- /Master Nav -->
+    </div>
+</header>
 {% endblock %}
 
-{% block content %}
+{% block body %}
 {% endblock %}
-<div class="clear"></div>
 
 
 <!-- footer -->
@@ -94,12 +67,11 @@
 
             <div class="menu">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="elements.html">Elements</a></li>
-                    <li><a href="portfolio_4_cols.html">Portfolio</a></li>
-                    <li><a href="pricing_5_cols.html">Pricing</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="{{ path('index') }}">Home</a></li>
+                    <li><a href="{{ path('product') }}">Products</a></li>
+                    <li><a href="{{ path('service') }}">Services</a></li>
+                    <li><a href="{{ path('about') }}">About</a></li>
+                    <li><a href="{{ path('contact') }}">Contact</a></li>
                 </ul>
             </div>
 
@@ -117,12 +89,3 @@
     </div>
 </footer>
 <!-- /footer -->
-<div id="demo-side-bar">
-    <?php include("http://www.egrappler.com/ad-sidebar.php");?>
-</div>
-</div>
-<!--wrapper end-->
-<!--Dynamically creates analytics markup-->
-<?php include("http://www.egrappler.com/analytics.php");?>
-</body>
-</html>

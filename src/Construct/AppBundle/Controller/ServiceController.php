@@ -29,10 +29,10 @@ class ServiceController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AppBundle:Service')->findAll();
+        $services = $em->getRepository('AppBundle:Service')->findAll();
 
         return array(
-            'entities' => $entities,
+            'services' => $services,
         );
     }
 
