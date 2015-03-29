@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<div class="container">
+    <hr>
+    {% for product in products %}
+    <div class="col-md-3 img-portfolio">
+        <a href="{{ path('product_show', {'id': product.id}) }}">
+            <p> {{ product.name }} </p>
+            <img class="img-responsive img-hover" src="{{ asset(product.webpath) }}" alt="">
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

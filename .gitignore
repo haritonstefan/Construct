@@ -9,3 +9,7 @@
 /vendor/
 /web/bundles/
 .idea
+/web/uploads/
+/web/js/
+/web/css/
+/web/images/
