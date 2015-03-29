@@ -3,8 +3,8 @@
 namespace Construct\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Product
@@ -46,13 +46,22 @@ class Product
 
     /**
      * @ORM\Column(name="image_name", type="string", length=255)
+     *
+     * @var string $imageName
      */
-    public $imageName;
+    private $imageName;
 
     /**
-     * @Assert\File(maxSize="6000000")
+     * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName")
+     *
+     * @var File $imageFile
      */
-    private $file;
+    private $imageFile;
+
+    /**
+     * @var integer
+     */
+    private $showOnHomePage;
 
     /**
      * Get id
@@ -133,85 +142,49 @@ class Product
         return $this;
     }
 
+    /**
+     * Get imageName
+     *
+     * @return string
+     */
     public function getImageName()
     {
         return $this->imageName;
     }
 
-    public function getAbsolutePath()
-    {
-        return null === $this->imageName
-            ? null
-            : $this->getUploadRootDir().'/'.$this->imageName;
-    }
-
-    public function getWebPath()
-    {
-        return $this->getUploadDir().'/'.$this->imageName;
-    }
-
-    protected function getUploadRootDir()
-    {
-        // the absolute directory path where uploaded
-        // documents should be saved
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
-    }
-
-    protected function getUploadDir()
-    {
-        // get rid of the __DIR__ so it doesn't screw up
-        // when displaying uploaded doc/image in the view.
-        return 'uploads/products';
-    }
-
     /**
-     * Sets file.
+     * Set imageName
      *
-     * @param UploadedFile $file
+     * @param string $imageName
+     * @return Product
      */
-    public function setFile(UploadedFile $file = null)
+    public function setImageName($imageName)
     {
-        $this->file = $file;
+        $this->imageName = $imageName;
+
+        return $this;
     }
 
     /**
-     * Get file.
+     * Get image file
      *
-     * @return UploadedFile
+     * @return File
      */
-    public function getFile()
+    public function getImageFile()
     {
-        return $this->file;
-    }
-
-    public function upload()
-    {
-        // the file property can be empty if the field is not required
-        if (null === $this->getFile()) {
-            return;
-        }
-
-        // use the original file name here but you should
-        // sanitize it at least to avoid any security issues
-
-        // move takes the target directory and then the
-        // target filename to move to
-        $this->getFile()->move(
-            $this->getUploadRootDir(),
-            $this->getFile()->getClientOriginalName()
-        );
-
-        // set the path property to the filename where you've saved the file
-        $this->imageName = $this->getFile()->getClientOriginalName();
-        // clean up the file property as you won't need it anymore
-        $this->file = null;
+        return $this->imageFile;
     }
 
     /**
-     * @ORM\PreRemove()
+     * Set image file
+     *
+     * @param File $image
+     * @return $this
      */
-    public function removeImage()
+    public function setImageFile(File $image)
     {
-        unlink($this->getWebPath());
+        $this->imageFile = $image;
+
+        return $this;
     }
 }

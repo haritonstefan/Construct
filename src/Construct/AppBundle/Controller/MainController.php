@@ -14,23 +14,4 @@ class MainController extends Controller
     {
         return $this->render('@App/Main/index.html.twig');
     }
-
-    /**
-     * @Route("/about", name="about")
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function aboutAction()
-    {
-        return $this->render('@App/Main/about.html.twig');
-    }
-
-    /**
-     * @Route("/contact", name="contact")
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function contactAction()
-    {
-        return $this->render('@App/Main/contact.html.twig');
-    }
 }
