@@ -13,8 +13,8 @@ class MainController extends Controller
     public function indexAction()
     {
         $entities = array_merge(
-            $this->getDoctrine()->getManager()->getRepository('AppBundle:Product')->findAll(),
-            $this->getDoctrine()->getManager()->getRepository('AppBundle:Service')->findAll()
+            $this->getDoctrine()->getManager()->getRepository('AppBundle:Product')->findByPromoted(1),
+            $this->getDoctrine()->getManager()->getRepository('AppBundle:Service')->findByPromoted(1)
         );
 
         return $this->render('@App/Main/index.html.twig', [

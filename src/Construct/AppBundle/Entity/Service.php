@@ -58,8 +58,8 @@ class Service
     private $file;
 
     /**
-     * @var  integer
-     * @ORM\Column(name="promoted", type="smallint")
+     * @var  bool
+     * @ORM\Column(name="promoted", type="boolean")
      */
     private $promoted;
 
@@ -165,39 +165,11 @@ class Service
         return $this;
     }
 
-    /**
-     * Get image file
-     *
-     * @return UploadedFile
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
-
-    /**
-     * Set image file
-     *
-     * @param UploadedFile $image
-     * @return $this
-     */
-    public function setFile(UploadedFile $image)
-    {
-        $this->file = $image;
-
-        return $this;
-    }
-
     public function getAbsolutePath()
     {
         return null === $this->imageName
             ? null
             : $this->getUploadRootDir().'/'.$this->imageName;
-    }
-
-    public function getWebPath()
-    {
-        return $this->getUploadDir().'/'.$this->imageName;
     }
 
     protected function getUploadRootDir()
@@ -238,11 +210,49 @@ class Service
     }
 
     /**
+     * Get image file
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * Set image file
+     *
+     * @param UploadedFile $image
+     * @return $this
+     */
+    public function setFile(UploadedFile $image)
+    {
+        $this->file = $image;
+
+        return $this;
+    }
+
+    /**
      * @ORM\PreRemove()
      */
     public function removeImage()
     {
         unlink($this->getWebPath());
+    }
+
+    public function getWebPath()
+    {
+        return $this->getUploadDir() . '/' . $this->imageName;
+    }
+
+    /**
+     * Get promoted
+     *
+     * @return integer
+     */
+    public function getPromoted()
+    {
+        return $this->promoted;
     }
 
     /**
@@ -256,15 +266,5 @@ class Service
         $this->promoted = $promoted;
 
         return $this;
-    }
-
-    /**
-     * Get promoted
-     *
-     * @return integer 
-     */
-    public function getPromoted()
-    {
-        return $this->promoted;
     }
 }

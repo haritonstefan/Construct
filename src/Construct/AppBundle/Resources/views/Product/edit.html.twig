@@ -4,30 +4,30 @@
     <div class="row" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
          xmlns="http://www.w3.org/1999/html">
 
-        {{ form_start(form) }}
-        {{ form_errors(form) }}
+        {{ form_start(edit_form) }}
+        {{ form_errors(edit_form) }}
         <div class="col-md-8">
             <img id="img" style="max-height: 600px; margin: 10px; " class="img-responsive"
                  src="{{ asset(product.webpath) }}">
-            {{ form_widget(form.file, {'attr': {'id': 'upload'}}) }}
+            {{ form_widget(edit_form.file, {'attr': {'id': 'upload'}}) }}
         </div>
 
         <div class="col-md-4 ">
-            {{ form_widget(form.name, {attr: {'class': 'row', 'style': 'margin:10px; width: 88%', 'type': 'text'}}) }}
-            {{ form_widget(form.description, {attr: {'class': 'row inputTextarea', 'style': 'margin: 10px', 'type': 'text'}}) }}
-            {{ form_widget(form.price, {attr: {'class': 'row', 'type': 'number', 'style': 'margin: 10px'}}) }}
-            {{ form_label(form.promoted) }}
-            {{ form_widget(form.promoted, {attr: {'class': 'row', 'type': 'checkbox', 'style': 'margin: 10px'}}) }}
+            {{ form_widget(edit_form.name, {attr: {'class': 'row', 'style': 'margin:10px; width: 88%', 'type': 'text'}}) }}
+            {{ form_widget(edit_form.description, {attr: {'class': 'row inputTextarea', 'style': 'margin: 10px', 'type': 'text'}}) }}
+            {{ form_widget(edit_form.price, {attr: {'class': 'row', 'type': 'number', 'style': 'margin: 10px'}}) }}
+            {{ form_label(edit_form.promoted) }}
+            {{ form_widget(edit_form.promoted, {attr: {'class': 'row', 'type': 'checkbox', 'style': 'margin: 10px'}}) }}
         </div>
 
         {% if is_granted('ROLE_ADMIN') %}
             <div class="col-sm-1 pull-right margin_small">
                 <a href="{{ path('product_update', {'id': product.id}) }}">
-                    <div class="btn btn-default"> {{ form_widget(form.submit) }} </div>
+                    <div class="btn btn-default"> {{ form_widget(edit_form.submit) }} </div>
                 </a>
             </div>
         {% endif %}
-        {{ form_end(form) }}
+        {{ form_end(edit_form) }}
     </div>
 
 {% endblock %}

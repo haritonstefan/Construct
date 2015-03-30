@@ -123,10 +123,11 @@ class ProductController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
-
+        $editForm = $this->createEditForm($product);
         return array(
             'product'      => $product,
             'delete_form' => $deleteForm->createView(),
+            'edit_form' => $editForm->createView()
         );
     }
 
@@ -147,33 +148,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Product entity.
-     *
-     * @Route("/{id}/edit", name="product_edit")
-     * @Method("GET")
-     * @Template()
-     */
-    public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('AppBundle:Product')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Product entity.');
-        }
-
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity' => $entity,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
-
-    /**
      * Creates a form to edit a Product entity.
      *
      * @param Product $entity The entity
@@ -187,9 +161,37 @@ class ProductController extends Controller
             'method' => 'PUT',
         ));
 
+        $form->add('file', 'file', ['required' => 'false']);
         $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
+    }
+
+    /**
+     * Displays a form to edit an existing Product entity.
+     *
+     * @Route("/{id}/edit", name="product_edit")
+     * @Method("GET")
+     * @Template()
+     */
+    public function editAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $product = $em->getRepository('AppBundle:Product')->find($id);
+
+        if (!$product) {
+            throw $this->createNotFoundException('Unable to find Product entity.');
+        }
+
+        $editForm = $this->createEditForm($product);
+        $deleteForm = $this->createDeleteForm($id);
+
+        return array(
+            'product' => $product,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        );
     }
 
     /**

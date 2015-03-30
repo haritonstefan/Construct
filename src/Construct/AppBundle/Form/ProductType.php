@@ -18,7 +18,9 @@ class ProductType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('price')
-            ->add('promoted', 'checkbox')
+            ->add('promoted', 'choice', [
+                'choices' => ['1' => 'Yes', '0' => 'No']
+            ])
         ;
     }
     

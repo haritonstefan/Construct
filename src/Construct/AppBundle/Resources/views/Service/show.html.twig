@@ -15,8 +15,13 @@
 
         {% if is_granted('ROLE_ADMIN') %}
             <div class="col-sm-1 pull-right margin_small">
+                <a href="{{ path('service_edit', {'id': service.id}) }}">
+                    <div class="btn btn-default"> Edit</div>
+                </a>
                 <a href="{{ path('service_delete', {'id': service.id}) }}">
-                    <div class="btn btn-default"> {{ form(delete_form) }} </div>
+                    {{ form_start(delete_form) }}
+                    {{ form_widget(delete_form.submit, {'attr': {'class': 'btn btn-default'}}) }}
+                    {{ form_end(delete_form) }}
                 </a>
             </div>
         {% endif %}

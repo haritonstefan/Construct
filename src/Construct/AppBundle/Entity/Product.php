@@ -15,6 +15,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Product
 {
     /**
+     * @ORM\Column(name="image_name", type="string", length=255)
+     */
+    public $imageName;
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -22,40 +26,29 @@ class Product
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=40)
      */
     private $name;
-
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="text")
      */
     private $description;
-
     /**
      * @var float
      *
      * @ORM\Column(name="price", type="float")
      */
     private $price;
-
     /**
-     * @var  integer
-     * @ORM\Column(name="promoted", type="smallint")
+     * @var  bool
+     * @ORM\Column(name="promoted", type="boolean")
      */
     private $promoted;
-
-
-    /**
-     * @ORM\Column(name="image_name", type="string", length=255)
-     */
-    public $imageName;
-
     /**
      * @Assert\File(maxSize="6000000")
      */
@@ -170,16 +163,11 @@ class Product
             : $this->getUploadRootDir().'/'.$this->imageName;
     }
 
-    public function getWebPath()
-    {
-        return $this->getUploadDir().'/'.$this->imageName;
-    }
-
     protected function getUploadRootDir()
     {
         // the absolute directory path where uploaded
         // documents should be saved
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
     }
 
     protected function getUploadDir()
@@ -187,26 +175,6 @@ class Product
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
         return 'uploads/products';
-    }
-
-    /**
-     * Sets file.
-     *
-     * @param UploadedFile $file
-     */
-    public function setFile(UploadedFile $file = null)
-    {
-        $this->file = $file;
-    }
-
-    /**
-     * Get file.
-     *
-     * @return UploadedFile
-     */
-    public function getFile()
-    {
-        return $this->file;
     }
 
     public function upload()
@@ -233,11 +201,46 @@ class Product
     }
 
     /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+    }
+
+    /**
      * @ORM\PreRemove()
      */
     public function removeImage()
     {
         unlink($this->getWebPath());
+    }
+
+    public function getWebPath()
+    {
+        return $this->getUploadDir() . '/' . $this->imageName;
+    }
+
+    /**
+     * Get promoted
+     *
+     * @return integer
+     */
+    public function getPromoted()
+    {
+        return $this->promoted;
     }
 
     /**
@@ -251,15 +254,5 @@ class Product
         $this->promoted = $promoted;
 
         return $this;
-    }
-
-    /**
-     * Get promoted
-     *
-     * @return integer 
-     */
-    public function getPromoted()
-    {
-        return $this->promoted;
     }
 }

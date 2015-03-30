@@ -184,6 +184,7 @@ class ServiceController extends Controller
             'method' => 'PUT',
         ));
 
+        $form->add('file', 'file');
         $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
