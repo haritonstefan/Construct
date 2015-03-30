@@ -45,6 +45,13 @@ class Product
     private $price;
 
     /**
+     * @var  integer
+     * @ORM\Column(name="promoted", type="smallint")
+     */
+    private $promoted;
+
+
+    /**
      * @ORM\Column(name="image_name", type="string", length=255)
      */
     public $imageName;
@@ -213,5 +220,41 @@ class Product
     public function removeImage()
     {
         unlink($this->getWebPath());
+    }
+
+    /**
+     * Set promoted
+     *
+     * @param integer $promoted
+     * @return Product
+     */
+    public function setPromoted($promoted)
+    {
+        $this->promoted = $promoted;
+
+        return $this;
+    }
+
+    /**
+     * Get promoted
+     *
+     * @return integer 
+     */
+    public function getPromoted()
+    {
+        return $this->promoted;
+    }
+
+    /**
+     * Set imageName
+     *
+     * @param string $imageName
+     * @return Product
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+
+        return $this;
     }
 }

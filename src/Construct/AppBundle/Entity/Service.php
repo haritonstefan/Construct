@@ -60,6 +60,12 @@ class Service
     private $file;
 
     /**
+     * @var  integer
+     * @ORM\Column(name="promoted", type="smallint")
+     */
+    private $promoted;
+
+    /**
      * Get id
      *
      * @return integer
@@ -239,5 +245,28 @@ class Service
     public function removeImage()
     {
         unlink($this->getWebPath());
+    }
+
+    /**
+     * Set promoted
+     *
+     * @param integer $promoted
+     * @return Service
+     */
+    public function setPromoted($promoted)
+    {
+        $this->promoted = $promoted;
+
+        return $this;
+    }
+
+    /**
+     * Get promoted
+     *
+     * @return integer 
+     */
+    public function getPromoted()
+    {
+        return $this->promoted;
     }
 }

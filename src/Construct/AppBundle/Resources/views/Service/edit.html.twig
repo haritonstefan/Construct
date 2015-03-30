@@ -1,16 +1,20 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Service edit</h1>
+    <div class="row" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+         xmlns="http://www.w3.org/1999/html">
 
-    {{ form(edit_form) }}
+        <div class="col-md-8">
+            <img style="max-height: 600px; margin: 10px; " class="img-responsive" src="{{ asset(service.webpath) }}">
+            <input type="file"> {{ service.file }} </input>
+        </div>
 
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('service') }}">
-                Back to the list
-            </a>
-        </li>
-        <li>{{ form(delete_form) }}</li>
-    </ul>
+        <div class="col-md-4">
+            <input type="text"> {{ service.name }} </input>
+            <input type="text"> {{ service.description }} </input>
+            <input type="number"> {{ service.price  }} MDL</input>
+        </div>
+
+    </div>
+
 {% endblock %}

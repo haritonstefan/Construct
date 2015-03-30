@@ -45,20 +45,20 @@ class ServiceController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Service();
-        $form = $this->createCreateForm($entity);
+        $service = new Service();
+        $form = $this->createCreateForm($service);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
+            $em->persist($service);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('service_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('service_show', array('id' => $service->getId())));
         }
 
         return array(
-            'entity' => $entity,
+            'service' => $service,
             'form' => $form->createView(),
         );
     }
@@ -66,13 +66,13 @@ class ServiceController extends Controller
     /**
      * Creates a form to create a Service entity.
      *
-     * @param Service $entity The entity
+     * @param Service $service The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Service $entity)
+    private function createCreateForm(Service $service)
     {
-        $form = $this->createForm(new ServiceType(), $entity, array(
+        $form = $this->createForm(new ServiceType(), $service, array(
             'action' => $this->generateUrl('service_create'),
             'method' => 'POST',
         ));
@@ -91,11 +91,11 @@ class ServiceController extends Controller
      */
     public function newAction()
     {
-        $entity = new Service();
-        $form = $this->createCreateForm($entity);
+        $service = new Service();
+        $form = $this->createCreateForm($service);
 
         return array(
-            'entity' => $entity,
+            'service' => $service,
             'form' => $form->createView(),
         );
     }
@@ -111,16 +111,16 @@ class ServiceController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Service')->find($id);
+        $service = $em->getRepository('AppBundle:Service')->find($id);
 
-        if (!$entity) {
+        if (!$service) {
             throw $this->createNotFoundException('Unable to find Service entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity' => $entity,
+            'service' => $service,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -152,17 +152,17 @@ class ServiceController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Service')->find($id);
+        $service = $em->getRepository('AppBundle:Service')->find($id);
 
-        if (!$entity) {
+        if (!$service) {
             throw $this->createNotFoundException('Unable to find Service entity.');
         }
 
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($service);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity' => $entity,
+            'service' => $service,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
@@ -171,14 +171,14 @@ class ServiceController extends Controller
     /**
      * Creates a form to edit a Service entity.
      *
-     * @param Service $entity The entity
+     * @param Service $service The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createEditForm(Service $entity)
+    private function createEditForm(Service $service)
     {
-        $form = $this->createForm(new ServiceType(), $entity, array(
-            'action' => $this->generateUrl('service_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new ServiceType(), $service, array(
+            'action' => $this->generateUrl('service_update', array('id' => $service->getId())),
             'method' => 'PUT',
         ));
 
@@ -198,14 +198,14 @@ class ServiceController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Service')->find($id);
+        $service = $em->getRepository('AppBundle:Service')->find($id);
 
-        if (!$entity) {
+        if (!$service) {
             throw $this->createNotFoundException('Unable to find Service entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($service);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
@@ -215,7 +215,7 @@ class ServiceController extends Controller
         }
 
         return array(
-            'entity' => $entity,
+            'service' => $service,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
@@ -234,13 +234,13 @@ class ServiceController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:Service')->find($id);
+            $service = $em->getRepository('AppBundle:Service')->find($id);
 
-            if (!$entity) {
+            if (!$service) {
                 throw $this->createNotFoundException('Unable to find Service entity.');
             }
 
-            $em->remove($entity);
+            $em->remove($service);
             $em->flush();
         }
 

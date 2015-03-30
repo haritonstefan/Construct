@@ -1,6 +1,14 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="col-sm-1 pull-right">
+            <a href="{{ path('service_new') }}">
+                <div class="btn btn-default"> New Service </div>
+            </a>
+        </div>
+    {% endif %}
+
     <div class="container">
         <hr>
         {% for service in services %}
