@@ -13,6 +13,14 @@
             <h3> {{ service.price  }} MDL</h3>
         </div>
 
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="col-sm-1 pull-right margin_small">
+                <a href="{{ path('service_delete', {'id': service.id}) }}">
+                    <div class="btn btn-default"> {{ form(delete_form) }} </div>
+                </a>
+            </div>
+        {% endif %}
+
     </div>
     <!-- /.row -->
     <!-- Related Projects Row -->

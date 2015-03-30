@@ -8,10 +8,18 @@
     </div>
 
     <div class="col-md-4">
-        <h3>{{ product.name }}</h3>
+        <h3> {{ product.name }} </h3>
         <p> {{ product.description }}</p>
         <h3> {{ product.price  }} MDL</h3>
     </div>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="col-sm-1 pull-right margin_small">
+            <a href="{{ path('service_new') }}">
+                <div class="btn btn-default"> New Service </div>
+            </a>
+        </div>
+    {% endif %}
 
 </div>
 <!-- /.row -->

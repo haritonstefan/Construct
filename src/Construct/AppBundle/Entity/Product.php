@@ -140,9 +140,27 @@ class Product
         return $this;
     }
 
+    /**
+     * Get image name
+     *
+     * @return Product
+     */
     public function getImageName()
     {
         return $this->imageName;
+    }
+
+    /**
+     * Set imageName
+     *
+     * @param string $imageName
+     * @return Product
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+
+        return $this;
     }
 
     public function getAbsolutePath()
@@ -209,7 +227,7 @@ class Product
         );
 
         // set the path property to the filename where you've saved the file
-        $this->imageName = $this->getFile()->getClientOriginalName();
+        $this->setImageName($this->getFile()->getClientOriginalName());
         // clean up the file property as you won't need it anymore
         $this->file = null;
     }
@@ -243,18 +261,5 @@ class Product
     public function getPromoted()
     {
         return $this->promoted;
-    }
-
-    /**
-     * Set imageName
-     *
-     * @param string $imageName
-     * @return Product
-     */
-    public function setImageName($imageName)
-    {
-        $this->imageName = $imageName;
-
-        return $this;
     }
 }

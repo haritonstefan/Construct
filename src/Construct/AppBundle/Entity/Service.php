@@ -3,9 +3,8 @@
 namespace Construct\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Service
@@ -53,9 +52,8 @@ class Service
     private $imageName;
 
     /**
-     * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName")
-     *
-     * @var File $file
+     * @Assert\File(maxSize="6000000")
+     * @var UploadedFile $file
      */
     private $file;
 
@@ -170,7 +168,7 @@ class Service
     /**
      * Get image file
      *
-     * @return File
+     * @return UploadedFile
      */
     public function getFile()
     {
@@ -180,10 +178,10 @@ class Service
     /**
      * Set image file
      *
-     * @param File $image
+     * @param UploadedFile $image
      * @return $this
      */
-    public function setFile(File $image)
+    public function setFile(UploadedFile $image)
     {
         $this->file = $image;
 
@@ -213,7 +211,7 @@ class Service
     {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
-        return 'uploads/products';
+        return 'uploads/services';
     }
 
     public function upload()

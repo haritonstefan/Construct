@@ -51,6 +51,7 @@ class ServiceController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $service->upload();
             $em->persist($service);
             $em->flush();
 
@@ -77,6 +78,7 @@ class ServiceController extends Controller
             'method' => 'POST',
         ));
 
+        $form->add('file', 'file');
         $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
