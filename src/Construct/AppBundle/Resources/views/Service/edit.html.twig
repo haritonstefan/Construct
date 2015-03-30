@@ -4,17 +4,30 @@
     <div class="row" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
          xmlns="http://www.w3.org/1999/html">
 
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
         <div class="col-md-8">
-            <img style="max-height: 600px; margin: 10px; " class="img-responsive" src="{{ asset(service.webpath) }}">
-            <input type="file"> {{ service.file }} </input>
+            <img id="img" style="max-height: 600px; margin: 10px; " class="img-responsive"
+                 src="{{ asset(service.webpath) }}">
+            {{ form_widget(form.file, {'attr': {'id': 'upload'}}) }}
         </div>
 
-        <div class="col-md-4">
-            <input type="text"> {{ service.name }} </input>
-            <input type="text"> {{ service.description }} </input>
-            <input type="number"> {{ service.price  }} MDL</input>
+        <div class="col-md-4 ">
+            {{ form_widget(form.name, {attr: {'class': 'row', 'style': 'margin:10px; width: 88%', 'type': 'text'}}) }}
+            {{ form_widget(form.description, {attr: {'class': 'row inputTextarea', 'style': 'margin: 10px', 'type': 'text'}}) }}
+            {{ form_widget(form.price, {attr: {'class': 'row', 'type': 'number', 'style': 'margin: 10px'}}) }}
+            {{ form_label(form.promoted) }}
+            {{ form_widget(form.promoted, {attr: {'class': 'row', 'type': 'checkbox', 'style': 'margin: 10px'}}) }}
         </div>
 
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="col-sm-1 pull-right margin_small">
+                <a href="{{ path('service_update', {'id': service.id}) }}">
+                    <div class="btn btn-default"> {{ form_widget(form.submit) }} </div>
+                </a>
+            </div>
+        {% endif %}
+        {{ form_end(form) }}
     </div>
 
 {% endblock %}

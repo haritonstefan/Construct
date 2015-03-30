@@ -12,6 +12,7 @@
     'bundles/app/css/prettyPhoto.css'
     'bundles/app/css/bootstrap.min.css'
     'bundles/app/css/modern-business.css'
+    'bundles/app/css/mine.css'
     filter="cssrewrite" %}
     <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
@@ -38,7 +39,7 @@
         <!-- Logo -->
         {% image '@AppBundle/Resources/public/images/logo.jpg' %}
         <div class="logo">
-            {#<a href="{{ path('index') }}"> <img src="{{ asset_url }}"> </a>#}
+            <p><a class="pull-left" href="{{ path('index') }}"> Construct SRL </a></p>
         </div>
         {% endimage %}
         <!-- /Logo -->
@@ -82,7 +83,7 @@
 
 
             <p>
-                &copy; Some Rights Reserved. &nbsp; <a href="#">Legal Notices</a>
+                &copy; Toate drepturile rezervate &nbsp;
             </p>
 
         </div>

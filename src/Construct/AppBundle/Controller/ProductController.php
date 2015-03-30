@@ -2,14 +2,14 @@
 
 namespace Construct\AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Construct\AppBundle\Entity\Product;
 use Construct\AppBundle\Form\ProductType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Product controller.
@@ -45,23 +45,23 @@ class ProductController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Product();
-        $form = $this->createCreateForm($entity);
+        $product = new Product();
+        $form = $this->createCreateForm($product);
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            $entity->upload();
-            $em->persist($entity);
+            $product->upload();
+            $em->persist($product);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('product_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('product_show', array('id' => $product->getId())));
         }
 
         return array(
-            'entity' => $entity,
+            'product' => $product,
             'form'   => $form->createView(),
         );
     }
@@ -96,11 +96,11 @@ class ProductController extends Controller
      */
     public function newAction()
     {
-        $entity = new Product();
-        $form   = $this->createCreateForm($entity);
+        $product = new Product();
+        $form = $this->createCreateForm($product);
 
         return array(
-            'entity' => $entity,
+            'product' => $product,
             'form'   => $form->createView(),
         );
     }
@@ -131,6 +131,22 @@ class ProductController extends Controller
     }
 
     /**
+     * Creates a form to delete a Product entity by id.
+     *
+     * @param mixed $id The entity id
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm($id)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('product_delete', array('id' => $id)))
+            ->setMethod('DELETE')
+            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->getForm();
+    }
+
+    /**
      * Displays a form to edit an existing Product entity.
      *
      * @Route("/{id}/edit", name="product_edit")
@@ -151,19 +167,19 @@ class ProductController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Product entity.
-    *
-    * @param Product $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Product entity.
+     *
+     * @param Product $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Product $entity)
     {
         $form = $this->createForm(new ProductType(), $entity, array(
@@ -175,6 +191,7 @@ class ProductController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Product entity.
      *
@@ -203,11 +220,12 @@ class ProductController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Product entity.
      *
@@ -232,22 +250,5 @@ class ProductController extends Controller
         }
 
         return $this->redirect($this->generateUrl('product'));
-    }
-
-    /**
-     * Creates a form to delete a Product entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('product_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
     }
 }

@@ -12,7 +12,14 @@ class MainController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('@App/Main/index.html.twig');
+        $entities = array_merge(
+            $this->getDoctrine()->getManager()->getRepository('AppBundle:Product')->findAll(),
+            $this->getDoctrine()->getManager()->getRepository('AppBundle:Service')->findAll()
+        );
+
+        return $this->render('@App/Main/index.html.twig', [
+            'entities' => $entities
+        ]);
     }
 
     /**

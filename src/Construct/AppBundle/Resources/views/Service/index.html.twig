@@ -10,14 +10,17 @@
     {% endif %}
 
     <div class="container">
-        <hr>
-        {% for service in services %}
-            <div class="col-md-3 img-portfolio">
-                <a href="{{ path('service_show', {'id': service.id}) }}">
-                    <p> {{ service.name }} </p>
-                    <img class="img-responsive img-hover" src="{{ service.name }}" alt="">
-                </a>
-            </div>
-        {% endfor %}
+        {% if services | length > 0 %}
+            {% for service in services %}
+                <div class="col-md-3 img-portfolio">
+                    <a href="{{ path('service_show', {'id': service.id}) }}">
+                        <h3> {{ service.name }} </h3>
+                        <img class="img-responsive img-hover" src="{{ asset(service.webpath) }}" alt="">
+                    </a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h5> No Services to show! </h5>
+        {% endif %}
     </div>
 {% endblock %}

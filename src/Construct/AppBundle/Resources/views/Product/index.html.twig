@@ -1,15 +1,26 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-<div class="container">
-    <hr>
-    {% for product in products %}
-    <div class="col-md-3 img-portfolio">
-        <a href="{{ path('product_show', {'id': product.id}) }}">
-            <p> {{ product.name }} </p>
-            <img class="img-responsive img-hover" src="{{ asset(product.webpath) }}" alt="">
-        </a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="col-sm-1 pull-right margin_small">
+            <a href="{{ path('product_new') }}">
+                <div class="btn btn-default"> New Product</div>
+            </a>
+        </div>
+    {% endif %}
+
+    <div class="container">
+        {% if products | length > 0 %}
+            {% for product in products %}
+                <div class="col-md-3 img-portfolio">
+                    <a href="{{ path('product_show', {'id': product.id}) }}">
+                        <h3> {{ product.name }} </h3>
+                        <img class="img-responsive img-hover" src="{{ asset(product.webpath) }}" alt="">
+                    </a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h5> No products to show! </h5>
+        {% endif %}
     </div>
-    {% endfor %}
-</div>
 {% endblock %}

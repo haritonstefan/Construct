@@ -2,38 +2,23 @@
 
 {% block body %}
     <!-- Slider -->
+    {% if entities | length > 0 %}
     <div class="bannerbg">
         <div class="container clearfix">
             <div class="flexslider">
                 <ul class="slides">
+                    {% for entity in entities %}
                     <li>
-                        <img src="images/fslide01.jpg" alt=""/>
+                        <img src="{{ asset(entity.webpath) }}" alt=""/>
 
-                        <p class="flex-caption">I am Caption!</p>
+                        <p class="flex-caption">{{ entity.name }}</p>
                     </li>
-                    <li>
-                        <a href="#"><img src="images/fslide02.jpg" alt=""/></a>
-                    </li>
-                    <li>
-                        <img src="images/fslide03.jpg" alt=""/>
-
-                        <p class="flex-caption">I am Caption!</p>
-                    </li>
-                    <li>
-                        <img src="images/fslide04.jpg" alt=""/>
-                    </li>
-
-                    <li>
-                        <img src="images/fslide05.jpg" alt=""/>
-                    </li>
-
-                    <li>
-                        <img src="images/fslide06.jpg" alt=""/>
-                    </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
     </div>
+    {% endif %}
     <!-- /Slider -->
 
     <div class="clear padding40"></div>
@@ -46,236 +31,46 @@
         <div class="col_1_3">
             <div class="features">
                 <div class="title clearfix">
-                    <img src="images/code-icon.png" alt="" class="alignleft"/>
-
-                    <h3>Beautiful, Responsive and Valid Template</h3>
-
+                    <h3> Produse de calitate înaltă la prețuri rezonabile </h3>
                 </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque id ligula in ipsum vulputate
-                    volutpat at ut nisi. Aliquam erat volutpat. Maecenas pretium dolor vitae lectus fermentum convallis
-                    bibendum in erat. Donec vitae risus non lorem volutpat fringilla in in metus. Aenean quis eros diam.
-                    Proin porta quam at neque congue iaculis. <br/> <a href="#">more info</a></p>
+                <p>
+                    Oferim produse de cele mai înaltă calitate la cele mai bune prețuri.
+                    Toate produsele noastre sunt controlate să corespundă criteriilor de calitate.
+                    <br/>
+                    <a href="{{ path('product') }}"> Lista Produse </a>
+                </p>
             </div>
         </div>
         <div class="col_1_3">
             <div class="features">
                 <div class="title clearfix">
-                    <img src="images/intuitive-icon.png" alt="" class="alignleft"/>
-
-                    <h3>Eye Catching, Clean and Intuitive Design</h3>
-
+                    <h3> Servicii oferite de profesioniști certificați </h3>
                 </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque id ligula in ipsum vulputate
-                    volutpat at ut nisi. Aliquam erat volutpat. Maecenas pretium dolor vitae lectus fermentum convallis
-                    bibendum in erat. Donec vitae risus non lorem volutpat fringilla in in metus. Aenean quis eros diam.
-                    Proin porta quam at neque congue iaculis. <br/> <a href="#">more info</a></p>
+                <p>
+                    Specialiștii noștri sunt certificați în domeniul în care oferă servicii și au o experiență vastă
+                    în domeniu și pe piață.
+                    <br/> <a href="#"> Lista Servicii </a>
+                </p>
             </div>
         </div>
         <div class="col_1_3 last">
             <div class="features">
                 <div class="title clearfix">
-                    <img src="images/businesses-icon.png" alt="" class="alignleft"/>
-
-                    <h3>Perfect for Businesses & Portfolios</h3>
-
+                    <h3> Experiență </h3>
                 </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque id ligula in ipsum vulputate
-                    volutpat at ut nisi. Aliquam erat volutpat. Maecenas pretium dolor vitae lectus fermentum convallis
-                    bibendum in erat. Donec vitae risus non lorem volutpat fringilla in in metus. Aenean quis eros diam.
-                    Proin porta quam at neque congue iaculis. <br/> <a href="#">more info</a></p>
+                <p>
+                    Suntem o companie care realizeză importanța clienților și recenziilor bune de la ei.
+                    <br/> <a href="{{ path('about') }}"> Despre noi </a>
+                </p>
             </div>
         </div>
         <!-- END FEATURED COLUMNS -->
 
         <div class="clear padding10"></div>
 
-        <div class="recent_works_left">
-            <h2 class="red">Featured Work</h2>
-        </div>
-        <div class="recent_works_arrows">
-            <a href="#" class="prev_item"></a><a href="#" class="next_item"></a>
-        </div>
-
         <div class="clear"></div>
         <div class="line"></div>
-        <div class="clear padding30"></div>
-
-
-        <div class="recent_works">
-            <ul id="work">
-                <!-- START PORTFOLIO COLUMN #1 -->
-                <li id="id-1" class="app">
-						<span class="recent_image">
-							<a href="images/portfolio_large.jpg" data-rel="prettyPhoto" class="img-thumb"><img
-                                        class="portfolio_image" src="images/featured_work_1.jpg" alt=""/></a>
-						</span>
-                    <span class="title"><a href="portfolio_details.html">Open Source Icons</a></span>
-
-                    <span class="clear padding15"></span>
-                </li>
-                <!-- END PORTFOLIO COLUMN #1 -->
-
-                <!-- START PORTFOLIO COLUMN #2 -->
-                <li id="id-2" class="util">
-						<span class="recent_image">
-							<a href="images/portfolio_large.jpg" data-rel="prettyPhoto"
-                               title="Free Admin Template from eGrappler.com" class="img-thumb"><img
-                                        class="portfolio_image" src="images/featured_work_2.jpg" alt=""/></a>
-						</span>
-                    <span class="title"><a href="portfolio_details.html">Free Admin Template</a></span>
-
-                    <span class="clear padding15"></span>
-                </li>
-                <!-- END PORTFOLIO COLUMN #2 -->
-
-                <!-- START PORTFOLIO COLUMN #3 -->
-                <li id="id-3" class="app">
-						<span class="recent_image">
-							<a href="images/portfolio_large.jpg" data-rel="prettyPhoto" title="Free Social Plugin"
-                               class="img-thumb"><img class="portfolio_image" src="images/featured_work_3.jpg" alt=""/></a>
-						</span>
-                    <span class="title"><a href="portfolio_details.html">Free Social Plugin</a></span>
-
-                    <span class="clear padding15"></span>
-                </li>
-                <!-- END PORTFOLIO COLUMN #3 -->
-
-                <!-- START PORTFOLIO COLUMN #3 -->
-                <li id="id-4" class="app">
-						<span class="recent_image">
-							<a href="images/portfolio_large.jpg" data-rel="prettyPhoto" class="img-thumb"><img
-                                        class="portfolio_image" src="images/portfolio_image_4.jpg" alt=""/></a>
-						</span>
-                    <span class="title"><a href="portfolio_details.html">Desing Freebies</a></span>
-
-                    <span class="clear padding15"></span>
-                </li>
-                <!-- END PORTFOLIO COLUMN #3 -->
-
-                <!-- START PORTFOLIO COLUMN #3 -->
-                <li id="id-5" class="app">
-						<span class="recent_image">
-							<a href="images/portfolio_large.jpg" data-rel="prettyPhoto" class="img-thumb"><img
-                                        class="portfolio_image" src="images/portfolio_image_5.jpg" alt=""/></a>
-						</span>
-                    <span class="title"><a href="portfolio_details.html">Free WordPress Resume Theme</a></span>
-
-                    <span class="clear padding15"></span>
-                </li>
-                <!-- END PORTFOLIO COLUMN #3 -->
-
-                <!-- START PORTFOLIO COLUMN #3 -->
-                <li id="id-6" class="app">
-						<span class="recent_image">
-							<a href="images/portfolio_large.jpg" data-rel="prettyPhoto" class="img-thumb"><img
-                                        class="portfolio_image" src="images/portfolio_image_6.jpg" alt=""/></a>
-						</span>
-                    <span class="title"><a href="portfolio_details.html">jQuery Pagination Plugin</a></span>
-
-                    <span class="clear padding15"></span>
-                </li>
-                <!-- END PORTFOLIO COLUMN #3 -->
-
-                <!-- START PORTFOLIO COLUMN #3 -->
-                <li id="id-7" class="app">
-						<span class="recent_image">
-							<a href="images/portfolio_large.jpg" data-rel="prettyPhoto" class="img-thumb"><img
-                                        class="portfolio_image" src="images/portfolio_image_7.jpg" alt=""/></a>
-						</span>
-                    <span class="title"><a href="portfolio_details.html">Clean Business HTML Template</a></span>
-
-                    <span class="clear padding15"></span>
-                </li>
-                <!-- END PORTFOLIO COLUMN #3 -->
-            </ul>
-        </div>
-
     </section>
     <!-- /Content -->
 
-
-
-    <section class="homepage_widgets_bg clearfix">
-        <div class="container clearfix">
-
-            <div class="padding20"></div>
-
-
-            <!-- START COL 1/2 -->
-            <div class="col_1_2 ">
-                <h1 class="regular white bottom_line">About Us</h1>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus convallis urna a enim convallis a
-                    bibendum lectus scelerisque. Aenean at mauris augue, sed fringilla justo. Proin et porta ligula.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus convallis urna a enim convallis a
-                    bibendum lectus scelerisque. Aenean at mauris augue, sed fringilla justo. Proin et porta ligula.</p>
-
-                <p>Quisque malesuada lorem at leo volutpat tristique. Nunc sit amet felis imperdiet ante tincidunt
-                    viverra sit amet quis ipsum. Aenean metus urna, placerat ut pharetra id, pharetra eget turpis. Sed
-                    blandit nunc eget lorem vestibulum malesuada.Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit. Phasellus convallis urna a enim convallis a bibendum lectus scelerisque. Aenean at mauris
-                    augue, sed fringilla justo. Proin et porta ligula. Quisque malesuada lorem at leo volutpat
-                    tristique. Nunc sit amet felis imperdiet ante tincidunt viverra sit amet quis ipsum. </p>
-
-            </div>
-            <!-- END COL 1/2 -->
-
-            <!-- START COL 1/2 -->
-
-
-            <div class="col_1_2 last" id="why-section">
-                <h1 class="regular white bottom_line">Why Us</h1>
-
-                <div><a href="#"><img class="alignleft MT0" id="why1" src="images/content-img1.png" alt="img"></a></div>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus convallis urna a enim convallis a
-                    bibendum lectus scelerisque. Aenean at mauris augue, sed fringilla justo.
-                </p>
-
-                <div class="clear padding10"></div>
-
-                <div><a href="#"><img class="alignleft MT0" id="why2" src="images/content-img2.png" alt="img"></a></div>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus convallis urna a enim convallis a
-                    bibendum lectus scelerisque. Aenean at mauris augue, sed fringilla justo.
-                </p>
-
-                <div class="clear padding10"></div>
-
-                <div><a href="#"><img class="alignleft MT0" id="why3" src="images/content-img3.png" alt="img"></a></div>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus convallis urna a enim convallis a
-                    bibendum lectus scelerisque. Aenean at mauris augue, sed fringilla justo.
-                </p>
-
-
-            </div>
-            <div class="clear padding10"></div>
-
-            <!-- end col 1/2 -->
-
-
-            <!-- start col -->
-
-            <div>
-
-                <h2 class="regular white bottom_line">All-in-one Template</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus convallis urna a enim convallis a
-                    bibendum lectus scelerisque. Aenean at mauris augue, sed fringilla justo. Proin et porta
-                    ligula. </p>
-
-                <div class="clearfix">
-
-                    <a href="javascript:" class="green-button">Buy This Template</a>
-                </div>
-
-            </div>
-
-            <!-- emd col -->
-
-            <div class="clear padding80"></div>
-
-        </div>
-    </section>
 {% endblock %}

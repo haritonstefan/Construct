@@ -1,15 +1,33 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Product creation</h1>
+    <div class="row" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+         xmlns="http://www.w3.org/1999/html">
 
-    {{ form(form) }}
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <div class="col-md-8">
+            <img id="img" style="max-height: 600px; margin: 10px; " class="img-responsive"
+                 src="{{ asset(product.webpath) }}">
+            {{ form_widget(form.file, {'attr': {'id': 'upload'}}) }}
+        </div>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('product') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+        <div class="col-md-4 ">
+            {{ form_widget(form.name, {attr: {'class': 'row', 'style': 'width: 88%', 'type': 'text'}}) }}
+            {{ form_widget(form.description, {attr: {'class': 'row inputTextarea', 'type': 'text'}}) }}
+            {{ form_widget(form.price, {attr: {'class': 'row', 'type': 'number'}}) }}
+            {{ form_label(form.promoted) }}
+            {{ form_widget(form.promoted, {attr: {'class': 'row', 'type': 'checkbox'}}) }}
+        </div>
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="col-sm-1 pull-right margin_small">
+                <a href="{{ path('product_create') }}">
+                    <div class="btn btn-default"> {{ form_widget(form.submit) }} </div>
+                </a>
+            </div>
+        {% endif %}
+        {{ form_end(form) }}
+    </div>
+
 {% endblock %}
